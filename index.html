@@ -1,0 +1,27 @@
+---
+- name: Create, Add Content, and Host a File
+  hosts: all
+  user: ansible
+  become: yes
+  connection: ssh
+  gather_facts: yes
+
+  tasks:
+    - name: Create file
+      copy:
+        content: "This file created by Ansible."
+        dest: /mnt/playbook/index.html
+
+    - name: Add content to file
+      lineinfile:
+        path: /mnt/playbook/index.html # file name
+        line: "This is additional content added by Ansible." # add conent you want 
+        insertafter: EOF  # Insert the line at the end of the file
+        create: yes  # Create the file if it doesn't exist
+
+    - name: Host index.html file
+      copy:
+        src: /mnt/playbook/index.html  #  source file path
+        dest: /var/www/html/index.html  # destination file path
+        mode: "0644"  # Set file permissions (rw-r--r--)
+        remote_src: yes
