@@ -15,7 +15,7 @@
     - name: Add content to file
       lineinfile:
         path: /mnt/playbook/index.html # file name
-        line: "This is additional content added by Ansible." # add conent you want 
+        line: "This is trial file" # add conent you want 
         insertafter: EOF  # Insert the line at the end of the file
         create: yes  # Create the file if it doesn't exist
 
